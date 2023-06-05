@@ -2,20 +2,42 @@
 @tailwind components;
 @tailwind utilities;
 
-:root {
-  --foreground-rgb: 0, 0, 0;
-  --background-start-rgb: 214, 219, 220;
-  --background-end-rgb: 255, 255, 255;
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --foreground-rgb: 255, 255, 255;
-    --background-start-rgb: 0, 0, 0;
-    --background-end-rgb: 0, 0, 0;
-  }
-}
-
 body {
-  color: rgb(var(--foreground-rgb));
+  background-color: #d1cdb7;
+  -webkit-background-size: 0.3rem 0.3rem;
+  -moz-background-size: 0.3rem 0.3rem;
+  background-size: 0.3rem 0.3rem;
+  background-image: -webkit-linear-gradient(
+      left,
+      #ccc8b1 1px,
+      rgba(204, 200, 177, 0) 1px
+    ),
+    -webkit-linear-gradient(top, #ccc8b1 1px, rgba(204, 200, 177, 0) 1px);
+  background-image: -moz-linear-gradient(
+      left,
+      #ccc8b1 1px,
+      rgba(204, 200, 177, 0) 1px
+    ),
+    -moz-linear-gradient(top, #ccc8b1 1px, rgba(204, 200, 177, 0) 1px);
+  background-image: -o-linear-gradient(
+      left,
+      #ccc8b1 1px,
+      rgba(204, 200, 177, 0) 1px
+    ),
+    -o-linear-gradient(top, #ccc8b1 1px, rgba(204, 200, 177, 0) 1px);
+  background-image: -ms-linear-gradient(
+      left,
+      #ccc8b1 1px,
+      rgba(204, 200, 177, 0) 1px
+    ),
+    -ms-linear-gradient(top, #ccc8b1 1px, rgba(204, 200, 177, 0) 1px);
+  background-image: linear-gradient(
+      to right,
+      #ccc8b1 1px,
+      rgba(204, 200, 177, 0) 1px
+    ),
+    linear-gradient(to bottom, #ccc8b1 1px, rgba(204, 200, 177, 0) 1px);
+  letter-spacing: 0.03rem;
+  font-weight: lighter;
+  color: #454138;
 }

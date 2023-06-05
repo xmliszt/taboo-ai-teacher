@@ -1,7 +1,5 @@
-import { initializeApp } from "firebase/app";
-import { getAnalytics } from "firebase/analytics";
-import "firebase/auth";
-import "firebase/firestore";
+import { getApps, initializeApp } from "firebase/app";
+import { getAuth } from "firebase/auth";
 
 const clientCredentials = {
   apiKey: process.env.NEXT_PUBLIC_FIREBASE_API_KEY,
@@ -13,5 +11,8 @@ const clientCredentials = {
   measurementId: process.env.NEXT_PUBLIC_MEASUREMENT_ID,
 };
 
-export const app = initializeApp(clientCredentials);
-export const analytics = getAnalytics(app);
+if (!getApps().length) {
+  initializeApp(clientCredentials);
+}
+
+export const auth = getAuth();
