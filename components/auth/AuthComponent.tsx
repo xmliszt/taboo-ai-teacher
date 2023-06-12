@@ -1,30 +1,43 @@
 'use client';
 
-import { Avatar, Button, Flex, Spacer, Tag, TagLabel } from '@chakra-ui/react';
+import { Avatar, Button, Flex, Spacer, Tag } from '@chakra-ui/react';
 import { signOut } from 'firebase/auth';
-import { auth } from '@/firebase/firebase';
+import { auth, firestore } from '@/firebase/firebase';
 import { signInWithGooglePopUp } from '@/lib/auth';
 import { useState } from 'react';
 import { useAuthState } from 'react-firebase-hooks/auth';
 import Loader from '../common/Loader';
+import useToast from '@/lib/toast';
 
 export const AuthComponent = () => {
-  const [user, loading, error] = useAuthState(auth);
+  const [user] = useAuthState(auth);
   const [isScreenLoading, setIsScreenLoading] = useState(false);
   const [screenLoadingText, setScreenLoadingText] = useState<string>();
+  const toast = useToast();
 
   const signIn = async () => {
     setIsScreenLoading(true);
     setScreenLoadingText('Authenticating with Google...');
-    await signInWithGooglePopUp();
-    setIsScreenLoading(false);
+    try {
+      await signInWithGooglePopUp();
+      toast.success('Signed In Successfully!');
+    } catch (error) {
+      toast.error(error.message);
+    } finally {
+      setIsScreenLoading(false);
+    }
+  };
+
+  const _signOut = async () => {
+    await signOut(auth);
+    toast.success('Signed Out Successfully!');
   };
 
   const renderAuthComponent = () => {
     if (user) {
       return (
         <>
-          <Tag variant='outline' colorScheme='blackAlpha'>
+          <Tag variant='subtle' colorScheme='blackAlpha'>
             <Avatar
               src={user.photoURL ?? undefined}
               name={user.displayName ?? undefined}
@@ -33,13 +46,7 @@ export const AuthComponent = () => {
               mx='1'
             />
           </Tag>
-          <Button
-            onClick={() => {
-              signOut(auth);
-            }}
-          >
-            Sign Out
-          </Button>
+          <Button onClick={_signOut}>Sign Out</Button>
         </>
       );
     } else {

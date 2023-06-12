@@ -20,7 +20,7 @@ export default function RootLayout({
           <header className='h-14 min-w-full p-2 flex flex-row justify-between items-center border-b-[1px] border-b-black'>
             <Link href='/' className='font-extrabold text-3xl'>
               Taboo.AI
-              <span className='font-light text-base ml-2'>For Teacher</span>
+              <span className='font-light text-base ml-2'>Quizzer</span>
             </Link>
             <AuthComponent />
           </header>

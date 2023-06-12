@@ -25,7 +25,7 @@ export const theme = extendTheme({
   },
 });
 
-theme.colors = tailwind.theme?.colors;
+// theme.colors = tailwind.theme?.colors;
 
 export function UIProvider({ children }: { children: React.ReactNode }) {
   return (
