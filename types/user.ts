@@ -5,5 +5,5 @@ export default interface IUser {
   email: string;
   createdAt: string;
   lastLoginAt: string;
-  tokens: number; // The count of available tokens the user has, token is used as payment for services
+  tokens?: number; // The count of available tokens the user has, token is used as payment for services
 }

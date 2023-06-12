@@ -2,6 +2,7 @@ import Link from 'next/link';
 import './globals.css';
 import { UIProvider } from './theme';
 import { AuthComponent } from '@/components/auth/AuthComponent';
+import Footer from '@/components/Footer';
 
 export const metadata = {
   title: 'Create Next App',
@@ -17,7 +18,7 @@ export default function RootLayout({
     <html lang='en'>
       <body className='min-h-screen flex flex-col'>
         <UIProvider>
-          <header className='h-14 min-w-full p-2 flex flex-row justify-between items-center border-b-[1px] border-b-black'>
+          <header className='h-14 min-w-full p-2 flex flex-row justify-between items-center border-b-[1px] border-b-black sticky top-0 bg-white drop-shadow-md'>
             <Link href='/' className='font-extrabold text-3xl'>
               Taboo.AI
               <span className='font-light text-base ml-2'>Quizzer</span>
@@ -25,13 +26,26 @@ export default function RootLayout({
             <AuthComponent />
           </header>
           <section className='flex flex-row min-w-full h-auto flex-grow'>
-            <nav className='min-w-[150px] border-r-[1px] border-r-black'>
-              Navigation Panel
+            <nav className='min-w-[150px] border-r-[1px] border-r-black px-2 py-4'>
+              <ul>
+                <li>
+                  <Link href='/create'>New Quiz</Link>
+                </li>
+                <li>
+                  <Link href='/quizzes'>My Quizzes</Link>
+                </li>
+                <li>
+                  <Link href='/subscription'>Subscription</Link>
+                </li>
+                <li>
+                  <Link href='/settings'>My Settings</Link>
+                </li>
+              </ul>
             </nav>
             <main>{children}</main>
           </section>
-          <footer className='min-w-full h-8 border-t-[1px] border-t-black'>
-            Footer
+          <footer className='bg-white min-w-full h-10 border-t-[1px] border-t-black flex items-center justify-center flex-row gap-4 sticky bottom-0'>
+            <Footer />
           </footer>
         </UIProvider>
       </body>

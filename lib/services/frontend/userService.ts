@@ -9,11 +9,6 @@ import { doc, getDoc, setDoc } from 'firebase/firestore';
  * if not exist, add new doc into firestore
  */
 export async function createUserIfNotExist(user: User) {
-  const userSnapshot = await getDoc(doc(firestore, 'user', user.uid));
-  console.log(userSnapshot, userSnapshot.exists());
-  if (userSnapshot.exists()) {
-    return;
-  }
   const userData: IUser = {
     uid: user.uid,
     displayName: user.displayName,
@@ -21,7 +16,12 @@ export async function createUserIfNotExist(user: User) {
     email: user.email,
     createdAt: user.metadata.creationTime,
     lastLoginAt: user.metadata.lastSignInTime,
-    tokens: 100,
   };
-  await setDoc(doc(firestore, 'user', user.uid), userData, { merge: true });
+  const userSnapshot = await getDoc(doc(firestore, 'user', user.uid));
+  if (userSnapshot.exists()) {
+    await setDoc(doc(firestore, 'user', user.uid), userData, { merge: true });
+  } else {
+    userData.tokens = 100;
+    await setDoc(doc(firestore, 'user', user.uid), userData, { merge: true });
+  }
 }

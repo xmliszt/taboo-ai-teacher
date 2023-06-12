@@ -41,3 +41,15 @@ body {
   font-weight: lighter;
   color: #454138;
 }
+
+a:hover {
+  @apply text-red-600 transition-colors underline;
+}
+
+nav li {
+  @apply mb-4;
+}
+
+nav a {
+  @apply px-2 py-1 rounded-lg;
+}
